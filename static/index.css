@@ -1,0 +1,128 @@
+/* Stile per le immagini nel carousel */
+.img-standard {
+    width: 100%; /* L'immagine copre tutta la larghezza del contenitore */
+    height: 300px; /* Altezza fissa per uniformità */
+    object-fit: cover; /* Adatta l'immagine al contenitore mantenendo le proporzioni */
+    object-position: center; /* Centra l'immagine */
+    border-radius: 5px; /* Angoli arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra per un effetto visivo migliore */
+}
+
+/* Contenitore per l'immagine con overlay */
+.img-container {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Adatta la larghezza al contenitore */
+    height: 300px; /* Altezza fissa per uniformità */
+    overflow: hidden; /* Nasconde il contenuto in eccesso */
+    border-radius: 5px; /* Angoli arrotondati */
+}
+
+/* Immagine */
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adatta l'immagine al contenitore mantenendo le proporzioni */
+    object-position: center;
+}
+
+/* Overlay per il commento */
+.img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Sfondo semi-trasparente */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    opacity: 0; /* Nascondi l'overlay inizialmente */
+    transition: opacity 0.3s ease; /* Effetto di transizione */
+}
+
+/* Mostra l'overlay al passaggio del mouse */
+.img-container:hover .img-overlay {
+    opacity: 1;
+}
+
+/* Stile generale */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #FDFBF7;
+    color: #2E7D32;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2E7D32; /* Verde scuro */
+    color: #FDFBF7; /* Bianco */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-logo {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+/* Titoli */
+h1 {
+    color: #2E7D32;
+    font-weight: bold;
+}
+
+/* Pulsanti */
+.btn {
+    transition: background-color 0.3s ease;
+}
+
+/* Contenitore della mappa */
+.map-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-logout {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+
+    .map-container {
+        width: 95%;
+    }
+}
+
+

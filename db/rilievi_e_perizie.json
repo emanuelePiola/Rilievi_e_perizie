@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "680b9b3dbda24f7f13f65930"
+  },
+  "codOperatore": {
+    "$oid": "6808cbeaa370d1fd47e50825"
+  },
+  "descrizione": "Rilievo e perizia di prova",
+  "data_ora": "2021-06-01T00:00:00",
+  "coordinate": {
+    "lat": 44.417041,
+    "long": 7.430264
+  },
+  "foto": [
+    {
+      "url": "https://res.cloudinary.com/dv9rtnow9/image/upload/v1745662738/Rilievi-DJI_0035-LowRes-1170x658_lswcrl.jpg",
+      "commento": "Vista frontale dell'edificio"
+    },
+    {
+      "url": "https://res.cloudinary.com/dv9rtnow9/image/upload/v1745662837/ponte-di-augusto-e-tiberio-02_few4jb.jpg",
+      "commento": "Vista laterale dell'edificio"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "680b9b3dbda24f7f13f65931"
+  },
+  "codOperatore": {
+    "$oid": "680bd7ba76fc803bf1724240"
+  },
+  "descrizione": "Secondo rilievo",
+  "data_ora": "2021-06-02T00:00:00",
+  "coordinate": {
+    "lat": 44.418041,
+    "long": 7.431264
+  },
+  "foto": [
+    {
+      "url": "https://res.cloudinary.com/dv9rtnow9/image/upload/v1745663004/Alluvione-RomagnaApima-1200x423_sqiay5.jpg",
+      "commento": "Vista laterale del rilievo"
+    },
+    {
+      "url": "https://res.cloudinary.com/dv9rtnow9/image/upload/v1745663157/alluvione-emilia_dzun48.jpg",
+      "commento": "Vista superiore del rilievo"
+    }
+  ]
+}]

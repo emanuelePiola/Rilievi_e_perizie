@@ -1,0 +1,38 @@
+[
+    {
+        "nome": "João",
+        "cognome": "Silva",
+        "email": "joao.silva@example.com",
+        "username": "admin",
+        "password": "$2b$10$oyqaRwAUDUXlLQ/aonH8yeulPcn7SA308uSdX6O5R81JTgZKdHzf6",
+        "data_nascita": "1990-01-01",
+        "indirizzo": "Via Roma 1",
+        "citta": "Torino",
+        "cap": "10100",
+        "admin": true
+    },
+    {
+        "nome": "Maria",
+        "cognome": "Do Santos",
+        "email": "maria.do.santos@example.com",
+        "username": "user1",
+        "password": "$2b$10$oyqaRwAUDUXlLQ/aonH8yeulPcn7SA308uSdX6O5R81JTgZKdHzf6",
+        "data_nascita": "1995-01-01",
+        "indirizzo": "Via Torino 26",
+        "citta": "Genova",
+        "cap": "10100",
+        "admin": false
+    },
+    {
+        "nome": "Emanuele",
+        "cognome": "Piola",
+        "email": "e.piola.2730@vallauri.edu",
+        "username": "admin_piola",
+        "password": "$2b$10$jbg5SipB.Xd7IuVWISCyrOL.7gyTHbxY2h58dUtGNFAabIknQaQty",
+        "data_nascita": "2006-04-06",
+        "indirizzo": "Vicolo Sant Eustacchio 3",
+        "citta": "Savigliano",
+        "cap": "12038",
+        "admin": true
+    }
+]
