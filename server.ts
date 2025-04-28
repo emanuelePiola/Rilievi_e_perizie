@@ -42,16 +42,16 @@ const cookiesOptions = {
 };
 
 // Server HTTP PER RENDER
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`HTTP server listening on port ${PORT}`);
-});
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`HTTP server listening on port ${PORT}`);
+// });
 
 // Configura il server HTTPS
-// const credentials = { key: privateKey, cert: publicKey };
-// const httpsServer = https.createServer(credentials, app);
-// httpsServer.listen(HTTPS_PORT, () => {
-//   console.log(`HTTPS server listening on port ${HTTPS_PORT}`);
-// });
+const credentials = { key: privateKey, cert: publicKey };
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(HTTPS_PORT, () => {
+  console.log(`HTTPS server listening on port ${HTTPS_PORT}`);
+});
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
