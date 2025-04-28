@@ -26,8 +26,8 @@ dotenv.config({ path: '.env' });
 const app = express();
 const connectionString = process.env.connectionStringAtlas || '';
 const DB_NAME = process.env.dbName || '';
-const PORT_HTTP = process.env.PORT_HTTP || 3000;
-const PORT = process.env.PORT || 443;
+const PORT :any = process.env.PORT || 3000;
+const HTTPS_PORT = process.env.HTTPS_PORT || 443;
 const tokenExpiresIn = 3600; // 1 ora
 const privateKey = fs.readFileSync('./keys/privateKey.pem', 'utf8');
 const publicKey = fs.readFileSync('./keys/publicKey.crt', 'utf8');
@@ -41,12 +41,17 @@ const cookiesOptions = {
   sameSite: false
 };
 
-// Configura il server HTTPS
-const credentials = { key: privateKey, cert: publicKey };
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(PORT, () => {
-  console.log(`HTTPS server listening on port ${PORT}`);
+// Server HTTP PER RENDER
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`HTTP server listening on port ${PORT}`);
 });
+
+// Configura il server HTTPS
+// const credentials = { key: privateKey, cert: publicKey };
+// const httpsServer = https.createServer(credentials, app);
+// httpsServer.listen(HTTPS_PORT, () => {
+//   console.log(`HTTPS server listening on port ${HTTPS_PORT}`);
+// });
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
