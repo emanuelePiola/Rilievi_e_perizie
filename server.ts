@@ -165,42 +165,31 @@ app.post('/api/logout', (req: Request, res: Response) => {
 
 // Endpoint per creare un nuovo rilievo
 app.post('/api/rilievi', verifyToken, async (req: any, res: any) => {
-  const { titolo, descrizione, data, posizione } = req.body;
-  const file = req.files?.file;
+  const { cordinate, codOperatore, data_ora, descrizione_generale, foto } = req.body;
 
-  if (!titolo || !descrizione || !data || !posizione || !file) {
+  if (!cordinate || !codOperatore || !data_ora || !descrizione_generale || !foto) {
     return res.status(400).send({ err: 'Tutti i campi sono obbligatori.' });
   }
 
   try {
-    // Carica la foto su Cloudinary
-    const result = await cloudinary.uploader.upload(file.tempFilePath, {
-      folder: 'rilievi_perizie',
-    });
-  
-  // Salva il rilievo nel database
-  const client = new MongoClient(connectionString);
-  await client.connect();
-  const collection = client.db(DB_NAME).collection('rilievi_e_perizie');
+    const client = new MongoClient(connectionString);
+    await client.connect();
+    const collection = client.db(DB_NAME).collection('rilievi_e_perizie');
 
-  const rilievo = {
-    titolo,
-    descrizione,
-    data,
-    posizione,
-    foto: {
-      url: result.secure_url,
-      public_id: result.public_id,
-    },
-    codOperatore: req.payload._id, // ID dell'utente corrente
-  };
-  
-  const insertResult = await collection.insertOne(rilievo);
-  res.send({ message: 'Rilievo creato con successo.', rilievoId: insertResult.insertedId });
-} catch (err) {
-  console.error('Errore durante la creazione del rilievo:', err);
-  res.status(500).send({ err: 'Errore interno del server.' });
-}
+    const rilievo = {
+      cordinate,
+      codOperatore,
+      data_ora,
+      descrizione_generale,
+      foto,
+    };
+
+    const result = await collection.insertOne(rilievo);
+    res.send({ message: 'Rilievo creato con successo.', rilievoId: result.insertedId });
+  } catch (err) {
+    console.error('Errore durante la creazione del rilievo:', err);
+    res.status(500).send({ err: 'Errore interno del server.' });
+  }
 });
 
 // Endpoint protetto per ottenere i rilievi
