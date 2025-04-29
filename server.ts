@@ -61,6 +61,7 @@ const whitelist = [
   'http://localhost:3000',
   'https://localhost:3001',
   'http://localhost:8100',
+  'https://rilievi-e-perizie-emanuelepiola.onrender.com',
   'http://localhost:4200', // server angular
   'https://cordovaapp' // porta 443 (default)
 ];
