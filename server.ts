@@ -57,7 +57,28 @@ app.listen(PORT, '0.0.0.0', () => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+const whitelist = [
+  'http://localhost:3000',
+  'https://localhost:3001',
+  'http://localhost:8100',
+  'http://localhost:4200', // server angular
+  'https://cordovaapp' // porta 443 (default)
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin)
+      // browser direct call
+      return callback(null, true);
+    if (whitelist.indexOf(origin) === -1) {
+      var msg = `The CORS policy for this site does not
+    allow access from the specified Origin.`;
+      return callback(new Error(msg), false);
+    } else return callback(null, true);
+  },
+  credentials: true
+};
+app.use('/', cors(corsOptions));
 app.use(fileUpload({ limits: { fileSize: 10 * 1024 * 1024 } }));
 app.use('/', express.static('./static'));
 
@@ -139,6 +160,46 @@ app.post('/api/login', async (req: any, res: any) => {
 app.post('/api/logout', (req: Request, res: Response) => {
   res.clearCookie('token');
   res.send({ ris: 'Logout effettuato con successo.' });
+});
+
+// Endpoint per creare un nuovo rilievo
+app.post('/api/rilievi', verifyToken, async (req: any, res: any) => {
+  const { titolo, descrizione, data, posizione } = req.body;
+  const file = req.files?.file;
+
+  if (!titolo || !descrizione || !data || !posizione || !file) {
+    return res.status(400).send({ err: 'Tutti i campi sono obbligatori.' });
+  }
+
+  try {
+    // Carica la foto su Cloudinary
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+      folder: 'rilievi_perizie',
+    });
+  
+  // Salva il rilievo nel database
+  const client = new MongoClient(connectionString);
+  await client.connect();
+  const collection = client.db(DB_NAME).collection('rilievi_e_perizie');
+
+  const rilievo = {
+    titolo,
+    descrizione,
+    data,
+    posizione,
+    foto: {
+      url: result.secure_url,
+      public_id: result.public_id,
+    },
+    codOperatore: req.payload._id, // ID dell'utente corrente
+  };
+  
+  const insertResult = await collection.insertOne(rilievo);
+  res.send({ message: 'Rilievo creato con successo.', rilievoId: insertResult.insertedId });
+} catch (err) {
+  console.error('Errore durante la creazione del rilievo:', err);
+  res.status(500).send({ err: 'Errore interno del server.' });
+}
 });
 
 // Endpoint protetto per ottenere i rilievi
